@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use App\Models\Opcine; // or Opcine, based on the correct model name
+use App\Models\Isplate;  // This assumes the model's name is Isplate and it
 
 class IsplateTableSeeder extends Seeder
 {

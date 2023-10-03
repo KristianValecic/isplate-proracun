@@ -21,6 +21,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('/{rkpid}/transparentnost', [UserController::class, 'showEntries']);
+Route::get('/{name}/transparentnost', [UserController::class, 'showEntries']);
 Route::get('/isplate', [IsplateController::class, 'index']);
 Route::get('/opcine/all', [OpcineController::class, 'index']);

@@ -9,7 +9,6 @@ class OpcineController extends Controller
 {
     public function index()
     {
-        dd("stigo");
         $opcine = Opcine::all();  // Fetch all records from the Opcine table
         return response()->json($opcine);
     }

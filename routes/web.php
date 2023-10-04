@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IsplateController;
 use App\Http\Controllers\OpcineController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\EntryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +21,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('/{name}/transparentnost', [UserController::class, 'showEntries']);
+Route::get('/{name}/transparentnost', [EntryController::class, 'showEntries']);
 Route::get('/isplate', [IsplateController::class, 'index']);
 Route::get('/opcine/all', [OpcineController::class, 'index']);

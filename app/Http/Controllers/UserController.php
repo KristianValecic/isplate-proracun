@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Opcine;
 use Illuminate\Support\Facades\Log;
 
-class EntryController extends Controller
+class UserController extends Controller
 {
     //php artisan serve
     public function showEntries($name)

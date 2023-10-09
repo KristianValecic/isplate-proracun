@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IsplateController;
-use App\Http\Controllers\OpcineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +18,3 @@ Route::get('/', function () {
 });
 
 
-Route::get('/isplate', [IsplateController::class, 'index']);
-Route::get('/opcine/all', [OpcineController::class, 'index']);

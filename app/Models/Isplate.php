@@ -10,8 +10,8 @@ class Isplate extends Model
     use HasFactory;
     protected $table = 'isplate';
 
-    public function opcine() {
-    return $this->belongsTo(Opcine::class, 'rkpid', 'rkpid');
-}
-
+    public function opcine()
+    {
+        return $this->belongsTo(Opcine::class, 'rkpid', 'rkpid');
+    }
 }

@@ -16,6 +16,8 @@ return [
     */
 
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    
+    'allowed_origins' => ['https://test200.plavilink.hr'],
 
     'allowed_methods' => ['*'],
 

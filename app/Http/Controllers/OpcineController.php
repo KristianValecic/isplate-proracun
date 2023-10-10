@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Opcine; // or Opcine, based on the correct model name
 
 class OpcineController extends Controller
 {

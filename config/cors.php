@@ -16,12 +16,13 @@ return [
     */
 
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
-    
-    'allowed_origins' => ['https://test200.plavilink.hr'],
+
+    // 'allowed_origins' => ['https://test200.plavilink.hr'],
+    'allowed_origins' => ['http://127.0.0.1:4200'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    // 'allowed_origins' => ['*'],
 
     'allowed_origins_patterns' => [],
 

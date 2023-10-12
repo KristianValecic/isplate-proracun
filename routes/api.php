@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::get('/{name}/transparentnost', [UserController::class, 'showEntries']);
+Route::get('/{name}/transparentnost/{query}', [IsplateController::class, 'queryEntries']);
+Route::get('/{name}/transparentnost', [IsplateController::class, 'showEntries']);
 Route::get('/isplate', [IsplateController::class, 'index']);
 Route::get('/opcine/all', [OpcineController::class, 'index']);

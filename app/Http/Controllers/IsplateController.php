@@ -16,9 +16,9 @@ class IsplateController extends Controller
         return response()->json($isplate);
     }
 
-    public function queryEntries($name, $query)
+    public function queryEntries($name, $queryParam)
     {
-        Log::info('queryEntries: ' . $query . ' ' . $name);
+        Log::info('queryEntries: ' . $queryParam . ' ' . $name);
 
         $opcina =  Opcine::where('url', $name)->get();
 
@@ -28,9 +28,11 @@ class IsplateController extends Controller
 
         $entriesQuery = $this->getAllEntriesFromOpcina($opcina);
         $results = $entriesQuery
-            ->orWhere('isplate.naziv', 'LIKE', "%$query%")
-            ->orWhere('isplate.adresa', 'LIKE', "%$query%")
-            ->orWhere('isplate.mjesto', 'LIKE', "%$query%")
+            ->where(function ($query) use ($queryParam) {
+                $query->orWhere('isplate.naziv', 'LIKE', "%$queryParam%")
+                    ->orWhere('isplate.adresa', 'LIKE', "%$queryParam%")
+                    ->orWhere('isplate.mjesto', 'LIKE', "%$queryParam%");
+            })
             ->get();
 
         return response()->json($results);

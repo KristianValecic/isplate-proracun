@@ -18,15 +18,13 @@ class IsplateController extends Controller
 
     public function queryEntries($name, $queryParam)
     {
-        Log::info('queryEntries: ' . $queryParam . ' ' . $name);
-
         $opcina =  Opcine::where('url', $name)->get();
 
         if (!$opcina) {
             return response()->json(['error' => 'User not found'], 404);
         }
 
-        $entriesQuery = $this->getAllEntriesFromOpcina($opcina);
+        $entriesQuery = $this->getAllEntriesFromOpcina($opcina, $queryParam);
         $results = $entriesQuery
             ->where(function ($query) use ($queryParam) {
                 $query->orWhere('isplate.naziv', 'LIKE', "%$queryParam%")
@@ -39,25 +37,55 @@ class IsplateController extends Controller
     }
     public function showEntries($name)
     {
-        Log::info('showEntries: ' . $name);
-
         $opcina =  Opcine::where('url', $name)->get();
 
+        $year = request('year');
+        $keyWord = request('keyword');
+
+        $entriesQuery = $this->getAllEntriesFromOpcina($opcina, $year);
+
+        if (!$year) {
+            return response()->json(['error' => 'Unesite godinu za pretraživanje'], 400);
+        }
         if (!$opcina) {
-            return response()->json(['error' => 'User not found'], 404);
+            return response()->json(['error' => 'Opcina not found'], 404);
+        }
+        if ($keyWord) {
+            $entriesQuery = $this->searchEntries($entriesQuery, $keyWord);
         }
 
-        $entriesQuery = $this->getAllEntriesFromOpcina($opcina);
         $entries = $entriesQuery->get();
 
         return response()->json($entries);
     }
 
-    private function getAllEntriesFromOpcina($opcina)
+    private function searchEntries($entries, $keyWord)
     {
-        return DB::table('isplate')
+        $results = $entries->where(function ($query) use ($keyWord) {
+            $query->orWhere('isplate.naziv', 'LIKE', "%$keyWord%")
+                ->orWhere('isplate.adresa', 'LIKE', "%$keyWord%")
+                ->orWhere('isplate.mjesto', 'LIKE', "%$keyWord%");
+        });
+        return $results;
+    }
+
+    private function getAllEntriesFromOpcina($opcina, $year)
+    {
+        $results = DB::table('isplate')
             ->join('opcine', 'opcine.rkpid', '=', 'isplate.rkpid')
-            ->where('isplate.rkpid', $opcina[0]->rkpid)
+            ->where('opcine.rkpid', '=', $opcina[0]->rkpid)
+            ->where('isplate.created_at', 'LIKE', "%$year%")
+            // ->where(
+            //     function ($query) use ($year) {
+            //         $query
+            //             ->orWhere('isplate.naziv', 'LIKE', "%$queryParam%")
+            //             ->orWhere('isplate.adresa', 'LIKE', "%$queryParam%")
+            //             ->orWhere('isplate.created_at', 'LIKE', "%$queryParam%")
+            //             ->orWhere('isplate.mjesto', 'LIKE', "%$queryParam%");
+            //     }
+            // )
             ->select('isplate.*');
+
+        return $results;
     }
 }

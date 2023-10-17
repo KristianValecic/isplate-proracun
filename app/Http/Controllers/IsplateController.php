@@ -75,15 +75,6 @@ class IsplateController extends Controller
             ->join('opcine', 'opcine.rkpid', '=', 'isplate.rkpid')
             ->where('opcine.rkpid', '=', $opcina[0]->rkpid)
             ->where('isplate.created_at', 'LIKE', "%$year%")
-            // ->where(
-            //     function ($query) use ($year) {
-            //         $query
-            //             ->orWhere('isplate.naziv', 'LIKE', "%$queryParam%")
-            //             ->orWhere('isplate.adresa', 'LIKE', "%$queryParam%")
-            //             ->orWhere('isplate.created_at', 'LIKE', "%$queryParam%")
-            //             ->orWhere('isplate.mjesto', 'LIKE', "%$queryParam%");
-            //     }
-            // )
             ->select('isplate.*');
 
         return $results;

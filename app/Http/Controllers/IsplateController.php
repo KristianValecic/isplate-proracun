@@ -16,25 +16,25 @@ class IsplateController extends Controller
         return response()->json($isplate);
     }
 
-    public function queryEntries($name, $queryParam)
-    {
-        $opcina =  Opcine::where('url', $name)->get();
+    // public function queryEntries($name, $queryParam)
+    // {
+    //     $opcina =  Opcine::where('url', $name)->get();
 
-        if (!$opcina) {
-            return response()->json(['error' => 'User not found'], 404);
-        }
+    //     if (!$opcina) {
+    //         return response()->json(['error' => 'User not found'], 404);
+    //     }
 
-        $entriesQuery = $this->getAllEntriesFromOpcina($opcina, $queryParam);
-        $results = $entriesQuery
-            ->where(function ($query) use ($queryParam) {
-                $query->orWhere('isplate.naziv', 'LIKE', "%$queryParam%")
-                    ->orWhere('isplate.adresa', 'LIKE', "%$queryParam%")
-                    ->orWhere('isplate.mjesto', 'LIKE', "%$queryParam%");
-            })
-            ->get();
+    //     $entriesQuery = $this->getAllEntriesFromOpcina($opcina, $queryParam);
+    //     $results = $entriesQuery
+    //         ->where(function ($query) use ($queryParam) {
+    //             $query->orWhere('isplate.naziv', 'LIKE', "%$queryParam%")
+    //                 ->orWhere('isplate.adresa', 'LIKE', "%$queryParam%")
+    //                 ->orWhere('isplate.mjesto', 'LIKE', "%$queryParam%");
+    //         })
+    //         ->get();
 
-        return response()->json($results);
-    }
+    //     return response()->json($results);
+    // }
     public function showEntries($name)
     {
         $opcina =  Opcine::where('url', $name)->get();

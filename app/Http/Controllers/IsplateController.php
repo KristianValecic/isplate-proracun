@@ -74,7 +74,7 @@ class IsplateController extends Controller
         $results = DB::table('isplate')
             ->join('opcine', 'opcine.rkpid', '=', 'isplate.rkpid')
             ->where('opcine.rkpid', '=', $opcina[0]->rkpid)
-            ->where('isplate.created_at', 'LIKE', "%$year%")
+            ->where('isplate.datum', 'LIKE', "%$year%")
             ->select('isplate.*');
 
         return $results;

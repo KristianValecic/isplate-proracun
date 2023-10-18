@@ -39,6 +39,6 @@ class CreateOpcinesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('opcines');
+        Schema::dropIfExists('opcine');
     }
 }

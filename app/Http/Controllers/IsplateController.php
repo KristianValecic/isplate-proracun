@@ -62,8 +62,11 @@ class IsplateController extends Controller
     private function searchEntries($entries, $keyWord)
     {
         $results = $entries->where(function ($query) use ($keyWord) {
-            $query->orWhere('isplate.naziv', 'LIKE', "%$keyWord%")
-                ->orWhere('isplate.adresa', 'LIKE', "%$keyWord%")
+            $query
+                ->orWhere('isplate.opis', 'LIKE', "%$keyWord%")
+                ->orWhere('isplate.primatelj', 'LIKE', "%$keyWord%")
+                ->orWhere('isplate.vrstarashoda', 'LIKE', "%$keyWord%")
+                ->orWhere('isplate.oib', 'LIKE', "%$keyWord%")
                 ->orWhere('isplate.mjesto', 'LIKE', "%$keyWord%");
         });
         return $results;
@@ -75,7 +78,13 @@ class IsplateController extends Controller
             ->join('opcine', 'opcine.rkpid', '=', 'isplate.rkpid')
             ->where('opcine.rkpid', '=', $opcina[0]->rkpid)
             ->where('isplate.datum', 'LIKE', "%$year%")
-            ->select('isplate.*');
+            ->select(
+                'isplate.*',
+                DB::raw(
+                    "DATE_FORMAT(isplate.datum, '%m/%Y') as foramtedDate"
+                ),
+                DB::raw("DATE_FORMAT(isplate.datum, '%m/%Y') as foramtedDate")
+            );
 
         return $results;
     }

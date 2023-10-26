@@ -83,7 +83,6 @@ class IsplateController extends Controller
                 DB::raw(
                     "DATE_FORMAT(isplate.datum, '%m/%Y') as foramtedDate"
                 ),
-                DB::raw("DATE_FORMAT(isplate.datum, '%m/%Y') as foramtedDate")
             );
 
         return $results;

@@ -36,6 +36,3 @@ Route::get('/opcine/{name}', [OpcineController::class, 'getOpcina']);
 Route::get('/add-image', [App\Http\Controllers\ImageUploadController::class, 'addImage'])->name('images.add');
 //For storing an image
 Route::post('/store-image', [App\Http\Controllers\ImageUploadController::class, 'storeImage']);
-//For showing an image
-//Route::get('/view-images',[App\Http\Controllers\ImageUploadController::class,'viewImages'])->name('images.view'); TODO ::: move to web.php
-///images

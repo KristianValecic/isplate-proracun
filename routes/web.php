@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//For showing an image
+Route::get('/view-images', [App\Http\Controllers\ImageUploadController::class, 'viewImages'])->name('images.view'); //TODO move to web.php
+///images

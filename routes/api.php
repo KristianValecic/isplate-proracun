@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/{name}/transparentnost', [IsplateController::class, 'showEntries']);
 Route::get('/isplate', [IsplateController::class, 'index']);
 Route::get('/opcine/all', [OpcineController::class, 'index']);
+Route::get('/opcine/{name}', [OpcineController::class, 'getOpcina']);
 
 
 ///images

@@ -15,9 +15,9 @@ class OpcineController extends Controller
     }
     public function getOpcina($name)
     {
-        Log::info('Showing user profile for user: ' . $name);
+        // Log::info('Showing user profile for user: ' . $name);
         $opcine = Opcine::where('naziv', 'like', '%' . $name . '%')
-            ->get();  // Fetch all records from the Opcine table
+            ->first();  // Fetch searched record from the Opcine table
         return response()->json($opcine);
     }
 }

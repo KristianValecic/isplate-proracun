@@ -13,7 +13,12 @@ class OpcineController extends Controller
         $opcine = Opcine::all();  // Fetch all records from the Opcine table
         return response()->json($opcine);
     }
-    public function getOpcina($name)
+    public function getOpcinaById($id)
+    {
+        $opcine = Opcine::where('id', $id)->first();  // Fetch searched record from the Opcine table
+        return response()->json($opcine);
+    }
+    public function getOpcinaByName($name)
     {
         // Log::info('Showing user profile for user: ' . $name);
         $opcine = Opcine::where('naziv', 'like', '%' . $name . '%')

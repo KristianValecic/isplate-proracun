@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Postimage;
+use Illuminate\Support\Facades\Log;
 
 
 class ImageUploadController extends Controller
@@ -15,9 +16,10 @@ class ImageUploadController extends Controller
 		$data = new Postimage();
 		if ($request->file('image')) {
 			$file = $request->file('image');
-			$filename = date('YmdHi') . $file->getClientOriginalName();
+			$filename = $file->getClientOriginalName();
 			$file->move(public_path('/image'), $filename);
 			$data['image'] = $filename;
+			Log::info('Showing filename: ' . $filename);
 		} else {
 			return response()->json([
 				"success" => false

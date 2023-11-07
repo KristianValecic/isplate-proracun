@@ -16,7 +16,7 @@ class ImageUploadController extends Controller
 		$data = new Postimage();
 		if ($request->file('image')) {
 			$file = $request->file('image');
-			$filename = $file->getClientOriginalName();
+			$filename = date('YmdHi') . $file->getClientOriginalName();
 			$file->move(public_path('/image'), $filename);
 			$data['image'] = $filename;
 			Log::info('Showing filename: ' . $filename);

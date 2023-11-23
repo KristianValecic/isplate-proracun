@@ -14,7 +14,6 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        // Log::info('Login request');
         $credentials = $request->validated();
 
         if (!Auth::attempt($credentials)) {
